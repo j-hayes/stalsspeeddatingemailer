@@ -101,7 +101,7 @@ namespace SpeedDatingEmailer
             string lastParticpantWithoutErrorId;
 
 
-            foreach (var participant in participants.Where(x=>x.IdNumber > 98).OrderBy(x=> x.IdNumber))
+            foreach (var participant in participants.Where(x=>x.IdNumber > 0).OrderBy(x=> x.IdNumber))
             {
                 Console.WriteLine($"Particpant {participant.FirstName} {participant.LastName} has {participant.Matches.Count}");
 
@@ -184,6 +184,8 @@ namespace SpeedDatingEmailer
             Console.WriteLine($"Number of emails sent {emailsSent} ");
             Console.WriteLine($"Number of emails responses {responses.Count}");
             Console.WriteLine($"Number of emails participants {participants.Count}");
+            Console.WriteLine("Press enter to end");
+            Console.ReadLine();
         }
     }
     public static class EventConstants
