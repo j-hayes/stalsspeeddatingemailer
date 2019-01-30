@@ -6,6 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="input\Master Speed Dating List - 2019.csv" />
+    <None Remove="input\Saint Alphonsus Speed Dating selections - 2019.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="input\Master Speed Dating List - 2019.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\Saint Alphonsus Speed Dating selections - 2019.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CsvHelper" Version="12.1.2" />
     <PackageReference Include="Gmail.Api" Version="1.0.7" />
   </ItemGroup>

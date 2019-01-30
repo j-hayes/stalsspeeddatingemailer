@@ -17,8 +17,8 @@ namespace SpeedDatingEmailer
 
         static void Main(string[] args)
         {
-            TextReader masterListReader = new StreamReader(@"input\Master Speed Dating List - Participants.csv");
-            TextReader responsesReader = new StreamReader(@"input\Saint Alphonsus Speed Dating 2019 selections.csv");
+            TextReader masterListReader = new StreamReader(@"input\Master Speed Dating List - 2019.csv");
+            TextReader responsesReader = new StreamReader(@"input\Saint Alphonsus Speed Dating selections - 2019.csv");
             var masterListCsvReader = new CsvReader(masterListReader, new Configuration() { HeaderValidated = null, MissingFieldFound = null });
             var responseReader = new CsvReader(responsesReader, new Configuration() { HeaderValidated = null, MissingFieldFound = null });
             List<Participant> participants = masterListCsvReader.GetRecords<Participant>().ToList();
@@ -101,7 +101,7 @@ namespace SpeedDatingEmailer
             string lastParticpantWithoutErrorId;
 
 
-            foreach (var participant in participants.Where(x=>x.IdNumber > 0).OrderBy(x=> x.IdNumber))
+            foreach (var participant in participants.Where(x=>x.IdNumber > 101).OrderBy(x=> x.IdNumber))
             {
                 Console.WriteLine($"Particpant {participant.FirstName} {participant.LastName} has {participant.Matches.Count}");
 
@@ -112,12 +112,12 @@ namespace SpeedDatingEmailer
                         using (var client = new SmtpClient("smtp.gmail.com"))
                         {
                             client.Port = 587;
-                            client.Credentials = new NetworkCredential("stalspeeddate@gmail.com", "{UPDATE THE PASSWORD HERE DO NOT CHECK IT INTO SOURCE CONTROL}");
+                            client.Credentials = new NetworkCredential("stalspeeddate@gmail.com", " INSERT PASSWORRD HERE-dO NOT CHECK PASSWORD INTO SOURCE CONTROLL");
                             client.EnableSsl = true;
 
                             message.To.Add(new MailAddress(participant.Email, participant.Email));
                             message.From = new MailAddress("stalspeeddate@gmail.com", "stalspeeddate@gmail.com");
-                            message.Subject = "Your speed dating results!";
+                            message.Subject = "Your speed dating results";
                             StringBuilder stringBuilder = new StringBuilder();
                             bool emailAddressNotValuid = false;
                             if (!participant.Matches.Any())
@@ -147,7 +147,7 @@ namespace SpeedDatingEmailer
                                             matches++;
                                         }
                                     }
-                                    stringBuilder.AppendLine($"{match.FullName}: {match.Email} {isAMatch}");
+                                    stringBuilder.AppendLine($"{match.FullName} - {match.IdNumber}: {match.Email} {isAMatch}");
                                 }
                             }
 
